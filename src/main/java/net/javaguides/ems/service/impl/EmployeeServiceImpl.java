@@ -9,6 +9,9 @@ import net.javaguides.ems.repository.EmployeeRepository;
 import net.javaguides.ems.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
@@ -32,12 +35,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 
-    // 직원 정보 읽어오기
+    // 직원 정보 조회 - 단일
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException(employeeId + " - 해당 id의 직원이 없습니다"));
+                .orElseThrow(() -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다"));
 
         return EmployeeMapper.mapToEmployeeDto(employee);
+    }
+
+
+    // 직원 정보 조회 - 전체
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+
+        return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+                .collect(Collectors.toList());
     }
 }
