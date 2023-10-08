@@ -39,7 +39,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다"));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다")
+                );
 
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
@@ -52,5 +54,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
                 .collect(Collectors.toList());
+    }
+
+
+    // 직원 정보 수정
+    @Override
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee) {
+
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                () -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다")
+        );
+
+        employee.setFirstName(updatedEmployee.getFirstName());
+        employee.setLastName(updatedEmployee.getLastName());
+        employee.setEmail(updatedEmployee.getEmail());
+
+        Employee updatedEmployeeObj = employeeRepository.save(employee);
+
+        return EmployeeMapper.mapToEmployeeDto(updatedEmployeeObj);
     }
 }

@@ -15,4 +15,7 @@ public interface EmployeeService {
 
     // 직원 정보 조회 -> 전체
     List<EmployeeDto> getAllEmployees();
+
+    // 직원 정보 수정
+    EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee);
 }
