@@ -58,4 +58,14 @@ public class EmployeeController {
 
 
 
+    // 직원 정보 삭제 - delete
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
+        employeeService.deleteEmployee(employeeId);
+
+        return ResponseEntity.ok("해당 직원 정보가 삭제 되었습니다.");
+    }
+
+
+
 }

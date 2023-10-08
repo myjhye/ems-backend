@@ -18,4 +18,7 @@ public interface EmployeeService {
 
     // 직원 정보 수정
     EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee);
+
+    // 직원 정보 삭제
+    void deleteEmployee(Long employeeId);
 }
