@@ -7,4 +7,6 @@ public interface EmployeeService {
 
     // 직원 정보 생성 메소드
     EmployeeDto createEmployee(EmployeeDto employeeDto);
+
+    EmployeeDto getEmployeeById(Long employeeId);
 }
