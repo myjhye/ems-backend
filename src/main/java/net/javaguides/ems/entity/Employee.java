@@ -18,6 +18,10 @@ import javax.persistence.*;
 
 // 엔티티와 데이터베이스 테이블 간의 매핑정보 지정
 @Table(name = "employees", schema = "ems")
+
+
+
+// entity -> db 테이블과 매핑 & 데이터를 저장, 관리
 public class Employee {
 
     // 엔티티의 primary key인 필드
