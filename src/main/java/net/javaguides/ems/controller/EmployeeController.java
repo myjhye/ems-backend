@@ -18,14 +18,14 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 
-    // 직원 정보 생성 - post
+    // 직원 정보 등록 - post
     @PostMapping
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
 
-        // employeeService 사용해 직원 생성 메소드 호출
+        // employeeService 사용해 직원 등록 메소드 호출
         EmployeeDto savedEmployee = employeeService.createEmployee(employeeDto);
 
-        // 생선된 직원 정보를 http 응답으로 반환 -> http 상태코드: 201 created
+        // 등록된 직원 정보를 http 응답으로 반환 -> http 상태코드: 201 created
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
