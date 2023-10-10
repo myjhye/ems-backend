@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    // 직원 정보 생성
+    // 직원 정보 등록
     EmployeeDto createEmployee(EmployeeDto employeeDto);
 
     // 직원 정보 조회 -> 단일
