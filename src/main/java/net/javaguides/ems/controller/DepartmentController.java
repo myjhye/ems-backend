@@ -27,4 +27,16 @@ public class DepartmentController {
         return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
     }
 
+
+
+    // 부서 조회 rest api - 단일
+    @GetMapping("{id}")
+    public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable("id") Long departmentId) {
+
+        // 부서 조회 메소드 호출
+        DepartmentDto departmentDto = departmentService.getDepartmentById(departmentId);
+
+        return ResponseEntity.ok(departmentDto);
+    }
+
 }

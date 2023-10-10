@@ -8,4 +8,6 @@ public interface DepartmentService {
     DepartmentDto createDepartment(DepartmentDto departmentDto);
 
 
+    // 부서 조회
+    DepartmentDto getDepartmentById(Long departmentId);
 }

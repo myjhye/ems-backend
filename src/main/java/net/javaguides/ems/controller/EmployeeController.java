@@ -30,7 +30,7 @@ public class EmployeeController {
     }
 
 
-    // 단일 직원 정보 조회 - get
+    // 직원 조회 - 단일
     @GetMapping("{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId) {
         EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
@@ -39,7 +39,7 @@ public class EmployeeController {
     }
 
 
-    // 전체 직원 정보 조회 - get
+    // 직원 조회 - 전체
     @GetMapping
     public ResponseEntity<List<EmployeeDto>> getEmployees() {
         List<EmployeeDto> employees =  employeeService.getAllEmployees();
