@@ -9,6 +9,9 @@ import net.javaguides.ems.repository.DepartmentRepository;
 import net.javaguides.ems.service.DepartmentService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @AllArgsConstructor
@@ -48,4 +51,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     // 부서 조회 - 전체
+    @Override
+    public List<DepartmentDto> getAllDepartments() {
+
+        List<Department> departments = departmentRepository.findAll();
+
+        return departments.stream().map((department) -> DepartmentMapper.mapToDepartmentDto(department))
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
 }

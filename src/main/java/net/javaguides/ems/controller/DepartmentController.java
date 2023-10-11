@@ -2,10 +2,13 @@ package net.javaguides.ems.controller;
 
 import lombok.AllArgsConstructor;
 import net.javaguides.ems.dto.DepartmentDto;
+import net.javaguides.ems.entity.Department;
 import net.javaguides.ems.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("*")
 @AllArgsConstructor
@@ -37,6 +40,16 @@ public class DepartmentController {
         DepartmentDto departmentDto = departmentService.getDepartmentById(departmentId);
 
         return ResponseEntity.ok(departmentDto);
+    }
+
+
+
+    // 부서 조회 rest api - 전체
+    @GetMapping
+    public ResponseEntity<List<DepartmentDto>> getDepartments() {
+        List<DepartmentDto> departments = departmentService.getAllDepartments();
+
+        return ResponseEntity.ok(departments);
     }
 
 }
