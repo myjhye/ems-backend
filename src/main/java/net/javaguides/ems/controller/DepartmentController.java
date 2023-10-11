@@ -52,4 +52,25 @@ public class DepartmentController {
         return ResponseEntity.ok(departments);
     }
 
+
+
+    // 부서 수정 rest api
+    @PutMapping("{id}")
+    public ResponseEntity<DepartmentDto> updatedDepartment(@PathVariable("id") Long departmentId,
+                                                           @RequestBody DepartmentDto departmentDto) {
+
+        DepartmentDto updatedDepartmentDto = departmentService.updateDepartment(departmentId, departmentDto);
+
+        return ResponseEntity.ok(departmentDto);
+    }
+
+
+    // 부서 삭제 rest api
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDepartment(@PathVariable("id") Long departmentId) {
+        departmentService.deleteDepartment((departmentId));
+
+        return ResponseEntity.ok("해당 직원 정보가 삭제 되었습니다.");
+    }
+
 }

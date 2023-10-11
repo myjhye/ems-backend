@@ -61,7 +61,35 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
+    // 부서 수정
+    @Override
+    public DepartmentDto updateDepartment(Long departmentId, DepartmentDto departmentDto) {
 
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("해당 부서가 없습니다")
+                );
+
+        department.setDepartmentDescription(departmentDto.getDepartmentName());
+        department.setDepartmentName(departmentDto.getDepartmentDescription());
+
+        Department updatedDepartmentObj = departmentRepository.save(department);
+
+        return DepartmentMapper.mapToDepartmentDto(updatedDepartmentObj);
+    }
+
+
+    // 부서 삭제
+    @Override
+    public void deleteDepartment(Long departmentId) {
+
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("해당 부서가 없습니다")
+                );
+
+        departmentRepository.deleteById(departmentId);
+    }
 
 
 }

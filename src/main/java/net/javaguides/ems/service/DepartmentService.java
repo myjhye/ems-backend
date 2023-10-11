@@ -16,4 +16,13 @@ public interface DepartmentService {
 
     // 부서 조회 - 전체
     List<DepartmentDto> getAllDepartments();
+
+
+    // 부서 수정
+    DepartmentDto updateDepartment(Long departmentId, DepartmentDto departmentDto);
+
+
+    // 부서 삭제
+    void deleteDepartment(Long departmentId);
+
 }
