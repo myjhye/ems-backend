@@ -20,8 +20,9 @@ public class DepartmentMapper {
 
         return new Department(
                 departmentDto.getId(),
-                departmentDto.getDepartmentDescription(),
-                departmentDto.getDepartmentName()
+                departmentDto.getDepartmentName(),
+                departmentDto.getDepartmentDescription()
+
         );
     }
 }

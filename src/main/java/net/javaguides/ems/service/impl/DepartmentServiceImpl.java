@@ -42,7 +42,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(
-                     () -> new ResourceNotFoundException(departmentId + " - 해당 부서가 없습니다" )
+                     () -> new ResourceNotFoundException("해당 부서가 없습니다" )
                 );
 
         return DepartmentMapper.mapToDepartmentDto(department);
@@ -70,8 +70,9 @@ public class DepartmentServiceImpl implements DepartmentService {
                         () -> new ResourceNotFoundException("해당 부서가 없습니다")
                 );
 
-        department.setDepartmentDescription(departmentDto.getDepartmentName());
-        department.setDepartmentName(departmentDto.getDepartmentDescription());
+
+        department.setDepartmentName(departmentDto.getDepartmentName());
+        department.setDepartmentDescription(departmentDto.getDepartmentDescription());
 
         Department updatedDepartmentObj = departmentRepository.save(department);
 
