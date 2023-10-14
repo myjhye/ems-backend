@@ -24,11 +24,11 @@ import javax.persistence.*;
 // entity -> db 테이블과 매핑 & 데이터를 저장, 관리
 public class Employee {
 
-    // 엔티티의 primary key인 필드
     @Id
-    // primary key 값 자동 생성
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-id-generator")
+    @SequenceGenerator(name = "custom-id-generator", sequenceName = "custom_sequence", initialValue = 1000)
     private Long id;
+
 
     @Column(name = "email_id", nullable = false, unique = true)
     private String email;
