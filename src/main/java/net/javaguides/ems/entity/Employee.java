@@ -30,14 +30,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    // 엔티티 필드와 데이터베이스 컬럼 간의 매핑 정보 지정
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
     @Column(name = "email_id", nullable = false, unique = true)
     private String email;
+
+
+    // 엔티티 필드와 데이터베이스 컬럼 간의 매핑 정보 지정
+    @Column(name = "full_name")
+    private String fullName;
+
+
+    @Column(name = "department")
+    private String department;
 }

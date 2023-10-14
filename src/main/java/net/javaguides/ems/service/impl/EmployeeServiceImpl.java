@@ -19,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
 
-    // 직원 정보 생성
+    // 직원 등록
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
 
@@ -35,19 +35,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 
-    // 직원 정보 조회 - 단일
+
+    // 직원 조회 - 단일
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(
-                        () -> new ResourceNotFoundException(employeeId + " - 해당 직원이 없습니다")
+                        () -> new ResourceNotFoundException("해당 직원이 없습니다")
                 );
 
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
 
-    // 직원 정보 조회 - 전체
+    // 직원 조회 - 전체
     @Override
     public List<EmployeeDto> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
@@ -57,16 +58,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-    // 직원 정보 수정
+    // 직원 수정
     @Override
     public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee) {
 
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다")
+                () -> new ResourceNotFoundException("해당 직원이 없습니다")
         );
 
-        employee.setFirstName(updatedEmployee.getFirstName());
-        employee.setLastName(updatedEmployee.getLastName());
+        employee.setFullName(updatedEmployee.getFullName());
         employee.setEmail(updatedEmployee.getEmail());
 
         Employee updatedEmployeeObj = employeeRepository.save(employee);
@@ -74,11 +74,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeMapper.mapToEmployeeDto(updatedEmployeeObj);
     }
 
+
+
+    // 직원 삭제
     @Override
     public void deleteEmployee(Long employeeId) {
 
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException(employeeId + " - 다음 id를 가진 직원이 없습니다")
+                () -> new ResourceNotFoundException("해당 직원이 없습니다")
         );
 
         employeeRepository.deleteById(employeeId);
