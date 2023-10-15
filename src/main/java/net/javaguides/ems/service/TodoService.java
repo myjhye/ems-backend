@@ -18,4 +18,8 @@ public interface TodoService {
     // todo 조회 -> 전체
     List<TodoDto> getAllTodos();
 
+
+     // todo 수정
+    TodoDto updateTodo(TodoDto todoDto, Long id);
+
 }

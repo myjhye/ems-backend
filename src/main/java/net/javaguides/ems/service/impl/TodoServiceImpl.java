@@ -62,4 +62,22 @@ public class TodoServiceImpl implements TodoService {
         return todos.stream().map((todo) -> modelMapper.map(todo, TodoDto.class))
                 .collect(Collectors.toList());
     }
+
+
+
+    // todo 수정
+    @Override
+    public TodoDto updateTodo(TodoDto todoDto, Long id) {
+
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(("해당 투두가 없습니다")));
+
+        todo.setTitle(todoDto.getTitle());
+        todo.setDescription(todoDto.getDescription());
+        todo.setCompleted(todoDto.isCompleted());
+
+        Todo updatedTodo = todoRepository.save(todo);
+
+        return modelMapper.map(updatedTodo, TodoDto.class);
+    }
 }
