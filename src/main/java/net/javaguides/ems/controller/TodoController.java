@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
@@ -32,7 +34,17 @@ public class TodoController {
 
         TodoDto todoDto = todoService.getTodo(id);
 
-        return new ResponseEntity<>(todoDto, HttpStatus.OK);
+        return ResponseEntity.ok(todoDto);
+    }
+
+
+    // todo 조회 -> 전체
+    @GetMapping
+    public ResponseEntity<List<TodoDto>> getAllTodo() {
+
+        List<TodoDto> todos = todoService.getAllTodos();
+
+        return ResponseEntity.ok(todos);
     }
 
 }
