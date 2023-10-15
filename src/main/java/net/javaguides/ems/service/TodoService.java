@@ -22,4 +22,8 @@ public interface TodoService {
      // todo 수정
     TodoDto updateTodo(TodoDto todoDto, Long id);
 
+
+    // todo 삭제
+    void deleteTodo(Long id);
+
 }

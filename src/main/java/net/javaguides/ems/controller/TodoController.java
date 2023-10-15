@@ -58,4 +58,14 @@ public class TodoController {
         return ResponseEntity.ok(updatedTodo);
     }
 
+
+    // todo 삭제
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable("id") Long id) {
+
+        todoService.deleteTodo(id);
+
+        return ResponseEntity.ok("해당 투두가 삭제됨");
+    }
+
 }

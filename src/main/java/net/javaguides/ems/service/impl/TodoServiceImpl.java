@@ -80,4 +80,15 @@ public class TodoServiceImpl implements TodoService {
 
         return modelMapper.map(updatedTodo, TodoDto.class);
     }
+
+
+    // todo 삭제
+    @Override
+    public void deleteTodo(Long id) {
+
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(("해당 투두가 없습니다")));
+
+        todoRepository.deleteById(id);
+    }
 }
