@@ -68,4 +68,14 @@ public class TodoController {
         return ResponseEntity.ok("해당 투두가 삭제됨");
     }
 
+
+    // todo 완료
+    @PatchMapping("{id}/complete")
+    public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long id) {
+
+        TodoDto updatedTodo = todoService.completeTodo(id);
+
+        return ResponseEntity.ok(updatedTodo);
+    }
+
 }
