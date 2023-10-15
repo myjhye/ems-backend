@@ -24,4 +24,15 @@ public class TodoController {
 
         return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
     }
+
+
+    // todo 조회 -> 단일
+    @GetMapping("{id}")
+    public ResponseEntity<TodoDto> getTodo(@PathVariable("id") Long id) {
+
+        TodoDto todoDto = todoService.getTodo(id);
+
+        return new ResponseEntity<>(todoDto, HttpStatus.OK);
+    }
+
 }

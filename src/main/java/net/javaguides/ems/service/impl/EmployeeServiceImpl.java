@@ -40,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 직원 조회 - 단일
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
+
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("해당 직원이 없습니다")
