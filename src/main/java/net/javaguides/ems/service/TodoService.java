@@ -30,4 +30,8 @@ public interface TodoService {
     // todo 완료
     TodoDto completeTodo(Long id);
 
+
+    // todo 미완료
+    TodoDto incompleteTodo(Long id);
+
 }
