@@ -41,4 +41,5 @@ public class Employee {
 
     @Column(name = "department")
     private String department;
+
 }
