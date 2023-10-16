@@ -23,8 +23,7 @@ public class Todo {
     // 'name' 안 써도 됨
     @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
     private String description;
     private boolean completed;
+    private String participants;
 }
