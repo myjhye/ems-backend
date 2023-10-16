@@ -16,4 +16,5 @@ public class TodoDto {
     private String description;
     private boolean completed;
     private String participants;
+    private String time;
 }
