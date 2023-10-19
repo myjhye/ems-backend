@@ -25,11 +25,12 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) -> {
-                    authorize.regexMatchers(HttpMethod.POST, "/api/.*").hasRole("ADMIN");
-                    authorize.regexMatchers(HttpMethod.PUT, "/api/.*").hasRole("ADMIN");
-                    authorize.regexMatchers(HttpMethod.DELETE, "/api/.*").hasRole("ADMIN");
-                    authorize.regexMatchers(HttpMethod.GET, "/api/.*").hasAnyRole("ADMIN", "USER");
-                    authorize.regexMatchers(HttpMethod.PATCH, "/api/.*").hasAnyRole("ADMIN", "USER");
+//                    authorize.regexMatchers(HttpMethod.POST, "/api/.*").hasRole("ADMIN");
+//                    authorize.regexMatchers(HttpMethod.PUT, "/api/.*").hasRole("ADMIN");
+//                    authorize.regexMatchers(HttpMethod.DELETE, "/api/.*").hasRole("ADMIN");
+//                    authorize.regexMatchers(HttpMethod.GET, "/api/.*").hasAnyRole("ADMIN", "USER");
+//                    authorize.regexMatchers(HttpMethod.PATCH, "/api/.*").hasAnyRole("ADMIN", "USER");
+                    authorize.regexMatchers(HttpMethod.GET, "/api/.*").permitAll();
 
                     authorize.anyRequest().hasRole("ADMIN");
                 })
