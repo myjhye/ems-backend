@@ -5,6 +5,7 @@ import net.javaguides.ems.dto.TodoDto;
 import net.javaguides.ems.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class TodoController {
 
 
     // todo 등록
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto) {
 
@@ -29,6 +31,7 @@ public class TodoController {
 
 
     // todo 조회 -> 단일
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("{id}")
     public ResponseEntity<TodoDto> getTodo(@PathVariable("id") Long id) {
 
@@ -39,6 +42,7 @@ public class TodoController {
 
 
     // todo 조회 -> 전체
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodo() {
 
@@ -50,6 +54,7 @@ public class TodoController {
 
 
     // todo 수정
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}")
     public ResponseEntity<TodoDto> updatedTodo(@RequestBody TodoDto todoDto, @PathVariable("id") Long id) {
 
@@ -60,6 +65,7 @@ public class TodoController {
 
 
     // todo 삭제
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteTodo(@PathVariable("id") Long id) {
 
@@ -70,6 +76,7 @@ public class TodoController {
 
 
     // todo 완료
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("{id}/complete")
     public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long id) {
 
@@ -80,6 +87,7 @@ public class TodoController {
 
 
     // todo 미완료
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("{id}/incomplete")
     public ResponseEntity<TodoDto> incompleteTodo(@PathVariable("id") Long id) {
 
