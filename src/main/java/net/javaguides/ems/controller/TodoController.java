@@ -19,9 +19,11 @@ public class TodoController {
     private TodoService todoService;
 
 
-    // todo 등록
+    // PreAuthorize : 권한 검사 -> admin만 접근 가능하도록
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
+
+    // todo 등록
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto) {
 
         TodoDto savedTodo = todoService.addTodo(todoDto);
