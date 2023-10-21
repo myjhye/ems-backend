@@ -16,7 +16,7 @@ public class AuthController {
     private AuthService authService;
 
 
-    // 유저 등록 rest api 생성
+    // register rest api 생성 -> 회원가입
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 
