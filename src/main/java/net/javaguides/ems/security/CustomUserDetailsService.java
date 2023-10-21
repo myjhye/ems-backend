@@ -24,9 +24,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
 
+
         // username 또는 email로 사용자 정보를 데이터베이스에서 조회
         User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("해당 이름과 이메일에 일치하는 유저가 없습니다"));
+
 
 
 
@@ -34,6 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> authorities = user.getRoles().stream()
                 .map((role) -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toSet());
+
 
 
 
