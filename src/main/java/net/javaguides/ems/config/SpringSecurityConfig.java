@@ -1,9 +1,12 @@
 package net.javaguides.ems.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -16,7 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SpringSecurityConfig {
+
+
+    private UserDetailsService userDetailsService;
+
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -31,34 +39,21 @@ public class SpringSecurityConfig {
                     // 모든 요청에 대한 인증 필요
                     authorize.anyRequest().authenticated();
                 })
+
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails myjhye = User.builder()
-                .username("myjhye")
-                .password(passwordEncoder().encode("1111"))
-                .roles("USER")
-                .build();
 
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
 
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(myjhye, admin);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
-        // Debug print to check roles assigned to users
-        userDetailsManager.createUser(User.builder()
-                .username("debugUser")
-                .password(passwordEncoder().encode("password"))
-                .roles("USER", "ADMIN")
-                .build());
-
-        return userDetailsManager;
+        return configuration.getAuthenticationManager();
     }
+
+
+
+
+
 }

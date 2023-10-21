@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // spring security에서 유저 인증, 권한 부여에 활용됨
         return new org.springframework.security.core.userdetails.User(
                 usernameOrEmail, // 유저 이름 또는 이메일
-                null, // 비밀번호 (여기서는 사용x)
+                user.getPassword(), // 비밀번호
                 authorities // 사용자의 권한 정보
         );
     }
