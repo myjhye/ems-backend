@@ -85,12 +85,20 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String login(LoginDto loginDto) {
 
+
+        // 입력 받은 username/email, 비밀번호로 인증 처리
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+
+
+                // 화면에서 입력 받는 필드 값 -> username/email, password -> 입력 받은 이 데이터는 서버에 전송되어 dto로 변환됨
                 loginDto.getUsernameOrEmail(),
                 loginDto.getPassword()
         ));
 
+
+        // 현재 인증 정보 설정 -> 현재 로그인한 유저가 인증되었음을 나타냄
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
 
         return "로그인 성공";
     }

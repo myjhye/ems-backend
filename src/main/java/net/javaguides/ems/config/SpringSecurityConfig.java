@@ -35,11 +35,14 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) -> {
+
                     // '/api/auth/**' 경로에 대한 모든 요청 허용 -> 인증 필요x
                     authorize.antMatchers("/api/auth/**").permitAll();
+
                     // 나머지 모든 요청에 대해서는 인증 필요
                     authorize.anyRequest().authenticated();
                 })
+
                 // http basic 인증(사용자 인증 처리 방식) 활성화 -> 다른 인증 처리 방식 : oauth, jwt
                 .httpBasic(Customizer.withDefaults());
 
