@@ -1,6 +1,7 @@
 package net.javaguides.ems.controller;
 
 import lombok.AllArgsConstructor;
+import net.javaguides.ems.dto.LoginDto;
 import net.javaguides.ems.dto.RegisterDto;
 import net.javaguides.ems.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class AuthController {
     private AuthService authService;
 
 
-    // register rest api 생성 -> 회원가입
+    // 회원가입 rest api
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 
@@ -24,5 +25,17 @@ public class AuthController {
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+
+
+    // 로그인 rest api
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+
+        String response = authService.login(loginDto);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
 
 }
