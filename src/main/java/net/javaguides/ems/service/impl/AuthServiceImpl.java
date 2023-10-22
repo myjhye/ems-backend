@@ -34,21 +34,18 @@ public class AuthServiceImpl implements AuthService {
     // 회원가입
     @Override
     public String register(RegisterDto registerDto) {
-
         // username이 데이터베이스에 있는지 확인
         if (userRepository.existsByUsername(registerDto.getUsername())) {
-
-            // 있으면 예외 던짐
-            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "유저 이름이 이미 있습니다");
+            // 닉네임 중복 오류를 나타내는 HTTP 상태 코드와 메시지 반환
+            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "닉네임이 이미 등록되어 있습니다");
         }
-
 
         // email이 데이터베이스에 있는지 확인
         if (userRepository.existsByEmail(registerDto.getEmail())) {
-
-            // 있으면 예외 던짐
-            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "이메일이 이미 있습니다");
+            // 이메일 중복 오류를 나타내는 HTTP 상태 코드와 메시지 반환
+            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "이메일이 이미 등록되어 있습니다");
         }
+
 
 
 

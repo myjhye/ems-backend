@@ -30,6 +30,8 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+
     // 필터 체인 -> 유저 접속 권한 검사 -> 권한 없는 유저면 접속 차단
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
