@@ -40,6 +40,7 @@ public class SpringSecurityConfig {
 
                     // '/api/auth/**' 경로에 대한 모든 요청 허용 -> 인증 필요x
                     authorize.antMatchers("/api/auth/**").permitAll();
+                    authorize.antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
                     // 나머지 모든 요청에 대해서는 인증 필요
                     authorize.anyRequest().authenticated();
