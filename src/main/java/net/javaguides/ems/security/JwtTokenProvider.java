@@ -38,6 +38,7 @@ public class JwtTokenProvider {
                 .compact();
 
         return token;
+
     }
 
     private Key key() {
