@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -14,32 +15,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// Execute Before Executing Spring Security Filters
+// Validate the JWT Token and Provides user details to Spring Security for Authentication
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-
     private JwtTokenProvider jwtTokenProvider;
+
     private UserDetailsService userDetailsService;
 
+    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-
-        // http request에서 jwt token 가져오기
+        // Get JWT token from HTTP request
         String token = getTokenFromRequest(request);
 
-        // validate token
-        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
-
+        // Validate Token
+        if(StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)){
             // get username from token
             String username = jwtTokenProvider.getUsername(token);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-
                     userDetails,
                     null,
                     userDetails.getAuthorities()
@@ -50,18 +55,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
-
         filterChain.doFilter(request, response);
-
     }
 
-
-    private String getTokenFromRequest(HttpServletRequest request) {
-
+    private String getTokenFromRequest(HttpServletRequest request){
         String bearerToken = request.getHeader("Authorization");
 
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-
+        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
             return bearerToken.substring(7, bearerToken.length());
         }
 
