@@ -18,7 +18,6 @@ public class EmployeeController {
 
     private EmployeeService employeeService;
 
-
     // 직원 정보 등록 - post
     @PostMapping
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
@@ -30,7 +29,6 @@ public class EmployeeController {
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
-
     // 직원 조회 - 단일
     @GetMapping("{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId) {
@@ -38,7 +36,6 @@ public class EmployeeController {
 
         return ResponseEntity.ok(employeeDto);
     }
-
 
     // 직원 조회 - 전체
     @GetMapping
@@ -48,17 +45,13 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-
     // 직원 정보 수정 - put
     @PutMapping("{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId,
-                                                      @RequestBody EmployeeDto updatedEmployee) {
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId, @RequestBody EmployeeDto updatedEmployee) {
         EmployeeDto employeeDto = employeeService.updateEmployee(employeeId, updatedEmployee);
 
         return ResponseEntity.ok(employeeDto);
     }
-
-
 
     // 직원 정보 삭제 - delete
     @DeleteMapping("{id}")
@@ -67,7 +60,4 @@ public class EmployeeController {
 
         return ResponseEntity.ok("해당 직원 정보가 삭제 되었습니다.");
     }
-
-
-
 }

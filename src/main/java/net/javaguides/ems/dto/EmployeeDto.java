@@ -11,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-// dto (data transfer object) -> 데이터 전송 형식 정의, 다른 시스템에 데이터 전송
 public class EmployeeDto {
 
     private Long id;

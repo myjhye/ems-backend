@@ -19,7 +19,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
 
-
     // 직원 등록
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
@@ -34,9 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
 
-
-
-
     // 직원 조회 - 단일
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
@@ -49,7 +45,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
-
     // 직원 조회 - 전체
     @Override
     public List<EmployeeDto> getAllEmployees() {
@@ -59,14 +54,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
-
     // 직원 수정
     @Override
     public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee) {
 
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException("해당 직원이 없습니다")
-        );
+        Employee employee = employeeRepository
+                .findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("해당 직원이 없습니다"));
 
         employee.setFullName(updatedEmployee.getFullName());
         employee.setEmail(updatedEmployee.getEmail());
@@ -76,15 +69,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeMapper.mapToEmployeeDto(updatedEmployeeObj);
     }
 
-
-
     // 직원 삭제
     @Override
     public void deleteEmployee(Long employeeId) {
 
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException("해당 직원이 없습니다")
-        );
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("해당 직원이 없습니다"));
 
         employeeRepository.deleteById(employeeId);
     }
